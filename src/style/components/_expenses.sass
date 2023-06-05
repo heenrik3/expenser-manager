@@ -1,0 +1,104 @@
+.expenses
+    height: 70%
+    width: 40%
+    background-color: transparent
+
+    flex: 1
+    transform: translateY(-10%)
+
+    display: grid
+    grid-template-rows: auto 1fr
+    gap: 2rem
+
+    @include respond(tab-land)
+        width: 75%
+    @include respond(tab-port)
+        width: 85%
+    @include respond(phone)
+        width: 95%
+
+    & > *
+        display: flex
+        flex-direction: column
+        gap: 1rem
+
+    & > :nth-child(1)
+        
+        @include card
+    
+    & > :nth-child(2)
+        max-height: 650px
+
+    &__heading
+        margin-bottom: 2rem
+        
+        display: flex
+        justify-content: space-between
+        flex: 1
+
+    
+    &__budget
+        font-weight: 900
+        font-size: 3.6rem
+
+        display: flex
+        gap: 1rem
+
+    &__input
+        width: 100%
+        border: transparent
+        background-color: transparent
+        outline: none
+    
+    &__bar
+        height: 10px
+        background: linear-gradient(90deg, #679BFF 16.67%, #4EF200 32.81%, #FFEC43 54.69%, #FF932F 72.92%, #FF0000 85.94%)
+
+        position: relative
+
+    &__progress
+        height: 100%
+        width: 1%
+        top: 0
+        right: 0
+        background-color: $light-background-color
+        position: absolute
+
+    &__list
+        list-style-type: none
+
+        flex: 1
+        display: flex
+        flex-direction: column
+        gap: 1rem
+        overflow: auto
+
+    &__item
+        @include card
+        padding: 1rem 2rem
+        
+        display: flex
+        align-items: center
+        justify-content: space-between
+
+        & > :nth-child(2)
+            display: flex
+            align-items: center
+            gap: 1rem
+
+            &:hover, &:active
+                .expenses__amount
+                    transform: translateY(0)
+
+                .expenses__delete
+                    opacity: 1
+
+    &__amount
+        color: $debt-color
+        font-weight: 700
+
+        transform: translateX(100%)
+
+    &__delete
+        padding: .5rem 2rem
+        opacity: 0
