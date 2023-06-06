@@ -12,7 +12,7 @@ const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(themes[getCurrentTheme()])
 
   const toggleTheme = () => {
-    setTheme(!getCurrentTheme())
+    setTheme(themes[!getCurrentTheme()])
   }
 
   const handleThemeChange = (e) => {
