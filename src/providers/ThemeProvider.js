@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react'
 import ThemeContext from '../contexts/ThemeContext'
 
+const themes = ['', 'moon']
+const preference = window.matchMedia('(prefers-color-scheme: dark)')
+
+const getCurrentTheme = () => {
+  return +preference.matches
+}
+
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('moon')
+  const [theme, setTheme] = useState(themes[getCurrentTheme()])
 
   const toggleTheme = () => {
-    const changed = theme === 'moon' ? 'sun' : 'moon'
+    setTheme(!getCurrentTheme())
+  }
 
-    localStorage.setItem('theme', changed)
-    setTheme(changed)
+  const handleThemeChange = (e) => {
+    setTheme(themes[+e.matches])
   }
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-
-    if (savedTheme) setTheme(savedTheme)
+    preference.addEventListener('change', handleThemeChange)
   }, [])
 
   return (
